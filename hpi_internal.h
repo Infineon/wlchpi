@@ -1,18 +1,18 @@
 /***************************************************************************//**
 * \file hpi_internal.h
-* \version 1.0
+* \version 2.0
 *
-* Provides general utility macros and definitions for the PDStack Middleware.
+* Provides general utility macros and definitions for the QiStack Middleware.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2021-2022, Cypress Semiconductor Corporation. All rights reserved.
+* Copyright 2022-2023, Cypress Semiconductor Corporation. All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
 *******************************************************************************/
 /**
-* \addtogroup group_autoHPI WLC HPI Library
+* \addtogroup group_wlcHPI WLC HPI Library
 * \{
 * */
 
@@ -28,7 +28,7 @@
 #include "cy_pdstack_dpm.h"
 #endif /* CCG_HPI_PD_ENABLE */
 
-/** \addtogroup group_autoHPI_macros
+/** \addtogroup group_wlcHPI_macros
 * \{
 * This section describes the WLC HPI Macros.
 * Detailed information about the macros is available in each macro description.
@@ -337,9 +337,14 @@
  */
 #define HPI_TEST_CODE_RAW_DATA_CHUNK_SIZE        (64u)
 
-/** \} group_autoHPI_macros */
+/**
+ * @brief Macro defines the HPI WLC command data starting offset.
+ */
+#define HPI_WLC_CMD_RESP_LEN                (4u)
 
-/** \addtogroup group_autoHPI_enums
+/** \} group_wlcHPI_macros */
+
+/** \addtogroup group_wlcHPI_enums
 * \{
 * This section describes the WLC HPI Enumerated Types.
 * Detailed information about the enums is available in each enum description.
@@ -696,13 +701,15 @@ typedef enum
     HPI_DEV_SCRATCHPAD_REGISTER         = 0xA0,         /**< EC can read/write any value to this register */
     HPI_DEV_IECS_COMMAND                = 0xA4,         /**< Four CC cmds for IECS firmware update */
     
-    HPI_DEV_REG_FLASH_MEM               = 0x0200        /**< Flash read/write memory region. This extends for 256
+    HPI_DEV_REG_FLASH_MEM               = 0x0200,       /**< Flash read/write memory region. This extends for 256
                                                              bytes from this address. */
+    HPI_DEV_REG_WLC_CMD_ADDR            = 0x8000,       /**< HPI WLC specific command register */
+    HPI_DEV_REG_WLC_RESP_ADDR           = 0x8400        /**< HPI WLC specific response register */
 } hpi_dev_reg_address_t;
 
-/** \} group_autoHPI_enums */
+/** \} group_wlcHPI_enums */
 
-/** \addtogroup group_autoHPI_macros
+/** \addtogroup group_wlcHPI_macros
 * \{
 * This section describes the WLC HPI Macros.
 * Detailed information about the macros is available in each macro description.
@@ -726,9 +733,9 @@ typedef enum
 /** Mask for boot priority field in HPI version register. */
 #define HPI_VERS_BOOT_PRIO_MASK         (0xE000)
 
-/** \} group_autoHPI_macros */
+/** \} group_wlcHPI_macros */
 
-/** \addtogroup group_autoHPI_enums
+/** \addtogroup group_wlcHPI_enums
 * \{
 * This section describes the WLC HPI Enumerated Types.
 * Detailed information about the enums is available in each enum description.
@@ -945,9 +952,9 @@ typedef enum
 
 } hpi_pd_ctrl_cmd_t;
 
-/** \} group_autoHPI_enums */
+/** \} group_wlcHPI_enums */
 
-/** \addtogroup group_autoHPI_data_structures
+/** \addtogroup group_wlcHPI_data_structures
 * \{
 * This section describes the WLC HPI Structures.
 * Detailed information about the structures is available in each structure description.
@@ -976,10 +983,10 @@ typedef union
 
 } hpi_vdm_ctrl_param_t;
 
-/** \} group_autoHPI_data_structures */
+/** \} group_wlcHPI_data_structures */
 
 #endif /* HPI_INTERNAL_H_ */
 
- /** \} group_autoHPI */
+ /** \} group_wlcHPI */
  
 /* [] END OF FILE */
